@@ -1,0 +1,75 @@
+.navbar-container {
+  background: #D0D7AB;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Add this to your Quote.css */
+.quote-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem;
+  padding-top: 6rem; /* Add top padding to account for fixed navbar */
+}
+
+.logo-text {
+  font-family: 'Georgia', serif;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #393939;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.nav-links-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-family: 'Georgia', serif;
+  font-size: 1.1rem;
+  color: #EEE4DF;
+  background: #D9B3B3;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: #b38d8d;
+  color: #FFF;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 1rem;
+  }
+  
+  .logo-text {
+    font-size: 1.5rem;
+  }
+  
+  .nav-link {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+  
+  .nav-links-container {
+    gap: 1rem;
+  }
+}
