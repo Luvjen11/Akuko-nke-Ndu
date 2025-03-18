@@ -1,4 +1,4 @@
-package com.example.Akuko.nke.Ndu.Quote;
+package com.example.akukoNkeNdu.Quote;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

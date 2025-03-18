@@ -1,4 +1,4 @@
-package com.example.Akuko.nke.Ndu.Quote;
+package com.example.akukoNkeNdu.Quote;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
