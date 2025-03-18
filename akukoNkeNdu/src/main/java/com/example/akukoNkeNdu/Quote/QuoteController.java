@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("Akuko-nke-Ndu/quotes")
 public class QuoteController {
-    
+
     @Autowired
     private QuoteService quoteService;
 
@@ -29,7 +30,7 @@ public class QuoteController {
 
     }
 
-    //get all quotes
+    // get all quotes
     @GetMapping
     public ResponseEntity<List<Quote>> getAllQuotes() {
         List<Quote> quotes = quoteService.getAllQuotes();
@@ -37,10 +38,22 @@ public class QuoteController {
         return ResponseEntity.ok(quotes);
     }
 
-    //delete quote
-    @DeleteMapping
+    // delete quote
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteQuote(@PathVariable Long id) {
+
+        if (!quoteService.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Quote not found");
+        }
         quoteService.deleteQuote(id);
         return ResponseEntity.ok("Quote deleted successfully");
+    }
+
+    // get random quote
+    @GetMapping("/random")
+    public ResponseEntity<Quote> getRandomQuote() {
+        Quote randomQuote = quoteService.getRandomQuote();
+
+        return randomQuote != null ? ResponseEntity.ok(randomQuote) : ResponseEntity.noContent().build();
     }
 }

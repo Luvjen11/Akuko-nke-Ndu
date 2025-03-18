@@ -1,6 +1,7 @@
 package com.example.akukoNkeNdu.Quote;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,13 +27,29 @@ public class QuoteService {
 
     //delete quote
     public void deleteQuote(Long id) {
-        quoteRepository.deleteById(id);;
+        quoteRepository.deleteById(id);
     }
 
-    // TODO: Implement random quote method
+
     //get random quote
-    // public Quote getRandomQuote() {
+    public Quote getRandomQuote() {
 
-    // }
+        List<Quote> quotes = quoteRepository.findAll();
 
+        if (quotes.isEmpty()) {
+            return null;
+        }
+
+        Random random = new Random();
+
+        int randomQuote = random.nextInt(quotes.size());
+
+        return quotes.get(randomQuote);
+
+    }
+
+    // check if quote exists
+    public boolean existsById(Long id) {
+        return quoteRepository.existsById(id);
+    }
 }
