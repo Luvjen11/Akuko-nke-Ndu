@@ -1,0 +1,141 @@
+.quote-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 2rem;
+}
+
+.quote-content {
+  width: 100%;
+  max-width: 800px;
+  min-height: 260px;
+  background: #FFF;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-header {
+  padding: 14px 20px;
+  background: #D0D7AB;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-dots {
+  display: flex;
+  gap: 10px;
+}
+
+.header-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #D9B3B3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.refresh-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.refresh-button:hover {
+  transform: rotate(90deg);
+  background: rgba(217, 179, 179, 0.1);
+}
+
+.refresh-button img {
+  width: 35px;
+  height: 35px;
+  transition: transform 0.3s ease;
+}
+
+.quote-body {
+  flex: 1;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #EEE4DF;
+  text-align: center;
+}
+
+.quote {
+  font-size: 1.3rem;
+  max-width: 85%;
+  margin: 0 1rem;
+  position: relative;
+  color: hsl(0, 0%, 22%);
+  line-height: 1.4;
+}
+
+.quote::before {
+  content: "“";
+  position: absolute;
+  left: -25px;
+  top: -10px;
+  font-size: 3.5rem;
+  color: #D9B3B3;
+}
+
+.author {
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding-top: 0.8rem;
+}
+
+.author::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: #D9B3B3;
+}
+
+.book {
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .quote-content {
+    max-width: 95%;
+    min-height: 280px;
+  }
+  .quote-body {
+    padding: 25px 15px;
+  }
+  .quote {
+    font-size: 1.3rem;
+    max-width: 90%;
+  }
+  .quote::before {
+    left: -20px;
+    font-size: 2.5rem;
+  }
+  .author {
+    font-size: 1.1rem;
+  }
+  .book {
+    font-size: 1rem;
+  }
+  .refresh-button img {
+    width: 24px;
+    height: 24px;
+  }
+}
