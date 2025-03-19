@@ -1,13 +1,43 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import refresh from '../assets/refreshButton.png'
 import "./Quote.css";
+import { getRandomQuotes } from '../services/api';
 
 const Quote = () => {
+
+  const [quote, setQuote] = useState({
+    quote: "",
+    author: "",
+    book: "",
+    loading: true,
+    error: null
+  });
+  
+  
+  useEffect(() => {
+    getQuote();
+  }, [])
+
+  const getQuote = async () => {
+    try {
+      setQuote(prev => ({...prev, loading:true, error:null}));
+      const {data} = await getRandomQuotes();
+      setQuote({
+        quote: data?.quote || "No quote available",
+        author: data?.author || "Unknown author",
+        book: data?.book || "Unknown book",
+        loading: false,
+      });
+    } catch(error) {
+      setQuote(prev => ({ ...prev, loading:false, error:error.message  || "Something went wrong"}));
+    }
+  };
+
   return (
     <div className="quote-container">
       <div className="quote-content">
         <div className="quote-header">
-          <button className='refresh-button'>
+          <button className="refresh-button" onClick={(getQuote)} disabled={quote.loading}>
             <img src={refresh} alt="Refresh" />
           </button>
           <div className="header-dots">
@@ -16,15 +46,13 @@ const Quote = () => {
             <div className="header-dot"></div>
           </div>
         </div>
-        
+
         <div className="quote-body">
-          <p className="quote">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Quae, repellendus. Nemo voluptas excepturi ratione.
-          </p>
+        <p className="quote">{quote.quote}</p>
+          {quote.error && <p className="error">{quote.error}</p>}
           <div className="quote-details">
-            <p className="author">Author Name</p>
-            <p className="book">Book Title</p>
+            <p className="author">{quote.author}</p>
+            <p className="book">{quote.book}</p>
           </div>
         </div>
       </div>

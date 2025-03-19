@@ -9,7 +9,8 @@ function App() {
       <Navbar />
       <Routes>
       <Route path="/" element={<Quote />}></Route>
-        <Route path="/random" element={<Quote />}></Route>
+        <Route path="/quotes" element={<Quote />}></Route>
+        <Route path="/quotes/random" element={<Quote />}></Route>
       </Routes>
     </Router>
   );
