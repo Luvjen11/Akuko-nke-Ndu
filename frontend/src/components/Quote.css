@@ -112,6 +112,32 @@
   font-style: italic;
 }
 
+.add-quote-button {
+  margin-top: 2rem;
+  background: #D9B3B3;
+  color: #FFF;
+  font-family: 'Georgia', serif;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-quote-button:hover {
+  background: #b38d8d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.error {
+  color: #D9B3B3;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
 @media (max-width: 768px) {
   .quote-content {
     max-width: 95%;
@@ -137,5 +163,11 @@
   .refresh-button img {
     width: 24px;
     height: 24px;
+  }
+
+  .add-quote-button {
+    font-size: 1rem;
+    padding: 8px 16px;
+    margin-top: 1.5rem;
   }
 }

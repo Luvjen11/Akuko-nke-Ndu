@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import refresh from '../assets/refreshButton.png'
 import "./Quote.css";
 import { getRandomQuotes } from '../services/api';
+import { Link } from 'react-router-dom';
 
 const Quote = () => {
 
@@ -56,6 +57,9 @@ const Quote = () => {
           </div>
         </div>
       </div>
+      <Link to="/add-quote" className="add-quote-button">
+            Add New Quote
+          </Link>
     </div>
   );
 }
