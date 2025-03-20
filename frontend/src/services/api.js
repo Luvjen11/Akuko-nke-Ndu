@@ -50,10 +50,10 @@ export const getRandomQuotes = async () => {
 
 export const createQuote = async (quote) => {
   try {
-    const response = await apiClient.post("", quote,{
+    const response = await apiClient.post("", quote, {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     });
     return response;
   } catch (error) {
@@ -62,12 +62,27 @@ export const createQuote = async (quote) => {
     if (error.response) {
       throw new Error(`Server Error: ${error.response.status}`);
     } else if (error.request) {
-      throw new Error("Network Error - Please check if the backend server is running");
+      throw new Error(
+        "Network Error - Please check if the backend server is running"
+      );
     } else {
       throw new Error("Request configuration Error");
     }
   }
 };
 
-export const deleteQuote = (quoteId) =>
-  axios.delete(API_BASE_URL + "/" + quoteId);
+export const deleteQuote = async (quoteId) => {
+  try {
+    const response = await apiClient.delete(`/${quoteId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Delete quote error:", error);
+    if (error.response) {
+      throw new Error(`Server Error: ${error.response.status}`);
+    } else if (error.request) {
+      throw new Error("Network Error");
+    } else {
+      throw new Error("Request configuration Error");
+    }
+  }
+};
