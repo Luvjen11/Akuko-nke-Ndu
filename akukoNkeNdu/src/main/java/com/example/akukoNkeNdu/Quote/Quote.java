@@ -20,4 +20,5 @@ public class Quote {
     private String quote;
     private String author;
     private String book;
+    private boolean favorite = false;
 }

@@ -52,4 +52,16 @@ public class QuoteService {
     public boolean existsById(Long id) {
         return quoteRepository.existsById(id);
     }
+
+    public Quote toggleFavorite(Long id) {
+        Quote quote = quoteRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Quote not found"));
+        quote.setFavorite(!quote.isFavorite()); // Flip the boolean
+        return quoteRepository.save(quote);
+    }
+    // Get all favorite 
+    public List<Quote> getAllFavorites() {
+        return quoteRepository.findByFavoriteTrue();
+    }
+
 }
