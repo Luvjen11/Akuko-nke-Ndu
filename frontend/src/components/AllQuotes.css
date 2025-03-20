@@ -1,0 +1,170 @@
+.all-quotes-container {
+    padding: 2rem;
+    padding-top: 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .quotes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .quotes-header h1 {
+    font-family: 'Georgia', serif;
+    color: #393939;
+    margin: 0;
+  }
+  
+  .quotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .quote-card {
+    background: #FFF;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .quote-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  .quote-card-header {
+    background: #D0D7AB;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .header-dots {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .header-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #D9B3B3;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quote-card-body {
+    padding: 20px;
+    background: #EEE4DF;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .quote-text {
+    font-family: 'Georgia', serif;
+    font-size: 1.1rem;
+    color: #393939;
+    margin-bottom: 1.5rem;
+    flex: 1;
+    position: relative;
+    padding-left: 15px;
+  }
+  
+  .quote-text::before {
+    content: "\201C"; /* Using Unicode character for left double quotation mark */
+    position: absolute;
+    left: -5px;
+    top: -10px;
+    font-size: 2rem;
+    color: #D9B3B3;
+  }
+  
+  .quote-details {
+    margin-top: auto;
+  }
+  
+  .author-text {
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    color: #D9B3B3;
+    margin: 0;
+    position: relative;
+    padding-top: 0.5rem;
+  }
+  
+  .author-text::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: #D9B3B3;
+  }
+  
+  .book-text {
+    font-family: 'Georgia', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #393939;
+    margin: 0.3rem 0 0;
+  }
+  
+  .loading-message,
+  .error-message,
+  .no-quotes-message {
+    text-align: center;
+    padding: 3rem;
+    font-family: 'Georgia', serif;
+    color: #393939;
+  }
+  
+  .retry-button,
+  .add-quote-button {
+    background: #D9B3B3;
+    color: #FFF;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+  
+  .retry-button:hover,
+  .add-quote-button:hover {
+    background: #b38d8d;
+    transform: translateY(-2px);
+  }
+  
+  .no-quotes-message .add-quote-button {
+    margin-top: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .all-quotes-container {
+      padding: 1rem;
+      padding-top: 5rem;
+    }
+    
+    .quotes-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .quotes-grid {
+      grid-template-columns: 1fr;
+    }
+  }

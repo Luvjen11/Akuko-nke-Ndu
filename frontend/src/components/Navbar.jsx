@@ -7,7 +7,7 @@ const Navbar = () => {
     <nav className="navbar-container">
       <Link to="/" className="logo-text">Asusu Nke Ndu</Link>
       <div className="nav-links-container">
-        <Link to="/archive" className="nav-link">View All</Link>
+        <Link to="/all-quotes" className="nav-link">View All</Link>
       </div>
     </nav>
   );
