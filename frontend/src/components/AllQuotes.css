@@ -151,6 +151,30 @@
   .no-quotes-message .add-quote-button {
     margin-top: 1rem;
   }
+
+  .delete-button {
+    margin-top: 1rem;
+    background: none;
+    border: 2px solid #D9B3B3;
+    color: #D9B3B3;
+    font-family: 'Georgia', serif;
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-self: flex-end;
+  }
+  
+  .delete-button:hover {
+    background: #D9B3B3;
+    color: white;
+  }
+  
+  .delete-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
   
   @media (max-width: 768px) {
     .all-quotes-container {
