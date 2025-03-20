@@ -12,7 +12,21 @@ const apiClient = axios.create({
   },
 });
 
-export const getAllQuotes = () => axios.get(API_BASE_URL);
+export const getAllQuotes = async () => {
+  try {
+    const response = await apiClient.get("");
+    return response.data;
+  } catch (error) {
+    console.error("Get all quotes error:", error);
+    if (error.response) {
+      throw new Error(`Server Error: ${error.response.status}`);
+    } else if (error.request) {
+      throw new Error("Network Error");
+    } else {
+      throw new Error("Request configuration Error");
+    }
+  }
+};
 export const getRandomQuotes = async () => {
   try {
     const response = await apiClient.get("/random");

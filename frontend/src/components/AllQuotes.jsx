@@ -17,10 +17,8 @@ const AllQuotes = () => {
     const allQuotes = async () => {
         try {
         setLoading(true);
-        const {response} = await getAllQuotes();
-        setQuotes(
-            response.data
-        );
+        const data = await getAllQuotes();
+        setQuotes(data);
         setError(null);
     } catch (error) {
         setError(error.message || "Something went wrong");
