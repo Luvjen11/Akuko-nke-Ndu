@@ -86,3 +86,35 @@ export const deleteQuote = async (quoteId) => {
     }
   }
 };
+
+export const toggleFavorite = async (quoteId) => {
+  try {
+    const response = await apiClient.put(`/${quoteId}/favorite`);
+    return response.data;
+  } catch (error) {
+    console.error("Toggle favorite error:", error);
+    if (error.response) {
+      throw new Error(`Server Error: ${error.response.status}`);
+    } else if (error.request) {
+      throw new Error("Network Error");
+    } else {
+      throw new Error("Request configuration Error");
+    }
+  }
+};
+
+export const getFavoriteQuotes = async () => {
+  try {
+    const response = await apiClient.get("/favorites");
+    return response.data;
+  } catch (error) {
+    console.error("Get favorites error:", error);
+    if (error.response) {
+      throw new Error(`Server Error: ${error.response.status}`);
+    } else if (error.request) {
+      throw new Error("Network Error");
+    } else {
+      throw new Error("Request configuration Error");
+    }
+  }
+};
