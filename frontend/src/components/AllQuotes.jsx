@@ -1,7 +1,7 @@
 import React, { useEffect , useState} from 'react'
 import "./AllQuotes.css";
 import { Link} from 'react-router-dom';
-import { deleteQuote, getAllQuotes } from '../services/api';
+import { deleteQuote, getAllQuotes, toggleFavorite } from '../services/api';
 
 const AllQuotes = () => {
 
@@ -45,6 +45,15 @@ const AllQuotes = () => {
         }
       }
     }
+
+    const handleToggleFavorite = async (id) => {
+      try {
+        const updatedQuote = await toggleFavorite(id);
+        setQuotes(quotes.map(quote => quote.id === id ?{...quote, favorite: updatedQuote.favorite} : quote ));
+      } catch (error) {
+        console.error('Error toggling favorite:', error);
+      }
+    };
 
     if (loading) {
         return (
@@ -90,6 +99,9 @@ const AllQuotes = () => {
                 </div>
               </div>
               <div className="quote-card-body">
+                <button className={`favorite-button ${quote.favorite ? 'favorite-active' : ''}`}
+                  onClick={() => handleToggleFavorite(quote.id)}
+                  aria-label={quote.favorite ? "Remove from favorites" : "Add to favorites"}>♥</button>
                 <p className="quote-text">{quote.quote}</p>
                 <div className="quote-details">
                   <p className="author-text">{quote.author}</p>

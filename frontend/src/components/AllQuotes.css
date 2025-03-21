@@ -175,6 +175,35 @@
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  .quote-card-body {
+    position: relative;
+  }
+  
+  .favorite-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #D0D7AB;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 5px;
+    line-height: 1;
+    opacity: 0.7;
+  }
+  
+  .favorite-button:hover {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  
+  .favorite-active {
+    color: #D9B3B3;
+    opacity: 1;
+  }
   
   @media (max-width: 768px) {
     .all-quotes-container {
