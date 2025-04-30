@@ -50,17 +50,28 @@ export const getRandomQuotes = async () => {
 
 export const createQuote = async (quote) => {
   try {
-    const response = await apiClient.post("", quote, {
+    // Ensure favorite field is set
+    const quoteWithFavorite = {
+      ...quote,
+      favorite: quote.favorite !== undefined ? quote.favorite : false
+    };
+    
+    console.log("Sending quote data:", JSON.stringify(quoteWithFavorite));
+    const response = await apiClient.post("", quoteWithFavorite, {
       headers: {
         "Content-Type": "application/json",
       },
     });
+    console.log("Server response:", response);
     return response;
   } catch (error) {
-    // Add error logging
+    // Add more detailed error logging
     console.error("API Error:", error);
     if (error.response) {
-      throw new Error(`Server Error: ${error.response.status}`);
+      console.error("Response data:", error.response.data);
+      console.error("Response status:", error.response.status);
+      console.error("Response headers:", error.response.headers);
+      throw new Error(`Server Error: ${error.response.status} - ${JSON.stringify(error.response.data)}`);
     } else if (error.request) {
       throw new Error(
         "Network Error - Please check if the backend server is running"

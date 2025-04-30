@@ -1,5 +1,6 @@
 package com.example.akukoNkeNdu.Quote;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,5 +21,6 @@ public class Quote {
     private String quote;
     private String author;
     private String book;
+    @Column(name = "favorite", nullable = true)
     private boolean favorite = false;
 }
