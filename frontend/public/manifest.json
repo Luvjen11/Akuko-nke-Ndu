@@ -1,0 +1,27 @@
+{
+  "name": "Akuko nke Ndu - The Story of Life",
+  "short_name": "Akuko Ndu",
+  "description": "A beautiful quote application with life stories and wisdom",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4a90e2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["lifestyle", "education", "entertainment"],
+  "lang": "en",
+  "dir": "ltr"
+} 
