@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ["maven", "openjdk21"]
+
+[phases.install]
+cmds = ["cd akukoNkeNdu && mvn clean package -DskipTests"]
+
+[start]
+cmd = "cd akukoNkeNdu && java -jar target/akukoNkeNdu-0.0.1-SNAPSHOT.jar" 
