@@ -1,0 +1,1 @@
+web: cd akukoNkeNdu && java -jar target/akukoNkeNdu-0.0.1-SNAPSHOT.jar 

@@ -2,7 +2,13 @@
 nixPkgs = ["maven", "openjdk21"]
 
 [phases.install]
-cmds = ["cd akukoNkeNdu && mvn clean package -DskipTests"]
+cmds = [
+  "cd akukoNkeNdu",
+  "mvn clean package -DskipTests"
+]
 
 [start]
-cmd = "cd akukoNkeNdu && java -jar target/akukoNkeNdu-0.0.1-SNAPSHOT.jar" 
+cmd = "cd akukoNkeNdu && java -jar target/akukoNkeNdu-0.0.1-SNAPSHOT.jar"
+
+[variables]
+JAVA_HOME = "/nix/store/*/openjdk-21" 
