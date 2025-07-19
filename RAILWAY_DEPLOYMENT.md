@@ -6,7 +6,7 @@ This project contains both a Spring Boot backend (in `akukoNkeNdu/`) and a React
 ## Files Added/Modified for Railway Deployment
 
 1. **`railway.json`** (root directory) - Railway configuration
-2. **`nixpacks.toml`** (root directory) - Nixpacks build configuration
+2. **`Procfile`** (root directory) - Standard Railway process file
 3. **Removed** `akukoNkeNdu/railway.json` - Old configuration
 
 ## Railway Setup Steps
@@ -16,22 +16,24 @@ This project contains both a Spring Boot backend (in `akukoNkeNdu/`) and a React
 - Click "New Project" → "Deploy from GitHub repo"
 - Select your repository: `Akuko-nke-Ndu`
 
-### 2. Configure Environment Variables
+### 2. Add MySQL Database
+- In your Railway project, go to "New" → "Database" → "MySQL"
+- Railway will automatically provide the connection details
+- Copy the connection details for the next step
+
+### 3. Configure Environment Variables
 In your Railway project dashboard, add these environment variables:
 
 ```
-DATABASE_URL=jdbc:postgresql://your-railway-postgres-url:5432/your-database-name
+DATABASE_URL=jdbc:mysql://your-railway-mysql-url:3306/your-database-name
 DATABASE_USERNAME=your-username
 DATABASE_PASSWORD=your-password
-DATABASE_DRIVER=org.postgresql.Driver
-HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+DATABASE_DRIVER=com.mysql.cj.jdbc.Driver
+HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
 PORT=8080
 ```
 
-### 3. Add PostgreSQL Database
-- In your Railway project, go to "New" → "Database" → "PostgreSQL"
-- Railway will automatically provide the connection details
-- Copy the `DATABASE_URL` from the PostgreSQL service and update your environment variables
+**Important**: Replace the values with the actual MySQL connection details from Railway.
 
 ### 4. Deploy
 - Railway will automatically detect the changes and start building
@@ -49,17 +51,20 @@ The application includes a health check endpoint at `/api/quotes` that Railway w
 ### If Build Fails
 1. Check the build logs in Railway dashboard
 2. Ensure all environment variables are set correctly
-3. Verify the PostgreSQL database is properly connected
+3. Verify the MySQL database is properly connected
 
 ### If Application Fails to Start
 1. Check the deployment logs
-2. Verify the `DATABASE_URL` format is correct
+2. Verify the `DATABASE_URL` format is correct for MySQL:
+   - Format: `jdbc:mysql://host:3306/database_name`
+   - Make sure to include the database name in the URL
 3. Ensure the database is accessible from Railway
 
 ### Common Issues
 - **Port binding**: The app uses `PORT` environment variable (Railway sets this automatically)
-- **Database connection**: Make sure PostgreSQL is added as a service in Railway
+- **Database connection**: Make sure MySQL is added as a service in Railway
 - **Memory issues**: Railway provides adequate memory for Spring Boot applications
+- **MySQL URL format**: Ensure the DATABASE_URL includes the database name
 
 ## API Endpoints
 Once deployed, your API will be available at:
