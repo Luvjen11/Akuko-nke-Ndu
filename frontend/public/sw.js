@@ -2,9 +2,8 @@ const CACHE_NAME = 'akuko-ndu-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/static/js/bundle.js',
-  '/static/css/main.css',
-  '/manifest.json'
+  '/manifest.json',
+  '/vite.svg'
 ];
 
 // Install event - cache resources
@@ -20,6 +19,11 @@ self.addEventListener('install', (event) => {
 
 // Fetch event - serve from cache if available
 self.addEventListener('fetch', (event) => {
+  // Don't cache API requests
+  if (event.request.url.includes('/api/') || event.request.url.includes('/quotes')) {
+    return;
+  }
+  
   event.respondWith(
     caches.match(event.request)
       .then((response) => {

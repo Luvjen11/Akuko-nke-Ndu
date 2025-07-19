@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Use environment variable for API URL, fallback to localhost for development
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api/quotes";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/Akuko-nke-Ndu/quotes";
 
 // Create an axios instance with timeout and better defaults
 const apiClient = axios.create({

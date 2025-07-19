@@ -19,10 +19,11 @@ public class AkukoNkeNduApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-					.allowedOriginPatterns("*")
-					.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+					.allowedOrigins("http://localhost:3000", "http://localhost:5173", "http://localhost:4173")
+					.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD")
 					.allowedHeaders("*")
-					.allowCredentials(true);
+					.allowCredentials(true)
+					.maxAge(3600);
 			}
 		};
 	}
