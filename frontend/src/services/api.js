@@ -13,6 +13,30 @@ const apiClient = axios.create({
   },
 });
 
+// Add request interceptor for debugging
+apiClient.interceptors.request.use(
+  (config) => {
+    console.log(`Making request to: ${config.baseURL}${config.url}`);
+    return config;
+  },
+  (error) => {
+    console.error("Request error:", error);
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor for debugging
+apiClient.interceptors.response.use(
+  (response) => {
+    console.log(`Response from: ${response.config.url}`, response.status);
+    return response;
+  },
+  (error) => {
+    console.error("Response error:", error);
+    return Promise.reject(error);
+  }
+);
+
 export const getAllQuotes = async () => {
   try {
     const response = await apiClient.get("");
@@ -22,12 +46,13 @@ export const getAllQuotes = async () => {
     if (error.response) {
       throw new Error(`Server Error: ${error.response.status}`);
     } else if (error.request) {
-      throw new Error("Network Error");
+      throw new Error("Network Error - Please check if the backend server is running");
     } else {
       throw new Error("Request configuration Error");
     }
   }
 };
+
 export const getRandomQuotes = async () => {
   try {
     const response = await apiClient.get("/random");
@@ -42,7 +67,7 @@ export const getRandomQuotes = async () => {
     if (error.response) {
       throw new Error(`Server Error: ${error.response.status}`);
     } else if (error.request) {
-      throw new Error("Network Error");
+      throw new Error("Network Error - Please check if the backend server is running");
     } else {
       throw new Error("Request configuration Error");
     }
@@ -92,7 +117,7 @@ export const deleteQuote = async (quoteId) => {
     if (error.response) {
       throw new Error(`Server Error: ${error.response.status}`);
     } else if (error.request) {
-      throw new Error("Network Error");
+      throw new Error("Network Error - Please check if the backend server is running");
     } else {
       throw new Error("Request configuration Error");
     }
@@ -108,7 +133,7 @@ export const toggleFavorite = async (quoteId) => {
     if (error.response) {
       throw new Error(`Server Error: ${error.response.status}`);
     } else if (error.request) {
-      throw new Error("Network Error");
+      throw new Error("Network Error - Please check if the backend server is running");
     } else {
       throw new Error("Request configuration Error");
     }
@@ -124,7 +149,7 @@ export const getFavoriteQuotes = async () => {
     if (error.response) {
       throw new Error(`Server Error: ${error.response.status}`);
     } else if (error.request) {
-      throw new Error("Network Error");
+      throw new Error("Network Error - Please check if the backend server is running");
     } else {
       throw new Error("Request configuration Error");
     }

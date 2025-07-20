@@ -1,1 +1,35 @@
 .qodo
+
+# Credentials and sensitive files
+akukoNkeNdu/src/main/resources/local.properties
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Build directories
+target/
+build/
+dist/
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
