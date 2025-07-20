@@ -7,7 +7,8 @@ This project contains both a Spring Boot backend (in `akukoNkeNdu/`) and a React
 
 1. **`railway.json`** (root directory) - Railway configuration
 2. **`Procfile`** (root directory) - Standard Railway process file
-3. **Removed** `akukoNkeNdu/railway.json` - Old configuration
+3. **`system.properties`** (in akukoNkeNdu/) - Specifies Java 17 for Railway
+4. **Removed** `akukoNkeNdu/railway.json` - Old configuration
 
 ## Railway Setup Steps
 
@@ -16,12 +17,16 @@ This project contains both a Spring Boot backend (in `akukoNkeNdu/`) and a React
 - Click "New Project" → "Deploy from GitHub repo"
 - Select your repository: `Akuko-nke-Ndu`
 
-### 2. Add MySQL Database
+### 2. Configure Root Directory
+- Set the **Root Directory** to: `akukoNkeNdu`
+- This tells Railway where to find your Spring Boot application
+
+### 3. Add MySQL Database
 - In your Railway project, go to "New" → "Database" → "MySQL"
 - Railway will automatically provide the connection details
 - Copy the connection details for the next step
 
-### 3. Configure Environment Variables
+### 4. Configure Environment Variables
 In your Railway project dashboard, add these environment variables:
 
 ```
@@ -35,13 +40,12 @@ PORT=8080
 
 **Important**: Replace the values with the actual MySQL connection details from Railway.
 
-### 4. Deploy
+### 5. Deploy
 - Railway will automatically detect the changes and start building
 - The build process will:
-  1. Install Maven and OpenJDK 21
-  2. Navigate to `akukoNkeNdu/` directory
-  3. Run `mvn clean package -DskipTests`
-  4. Start the application with `java -jar target/akukoNkeNdu-0.0.1-SNAPSHOT.jar`
+  1. Install Maven and OpenJDK 17
+  2. Run `mvn clean package -DskipTests`
+  3. Start the application with `java -jar target/akukoNkeNdu-0.0.1-SNAPSHOT.jar`
 
 ## Health Check
 The application includes a health check endpoint at `/api/quotes` that Railway will use to verify the deployment.
@@ -52,6 +56,7 @@ The application includes a health check endpoint at `/api/quotes` that Railway w
 1. Check the build logs in Railway dashboard
 2. Ensure all environment variables are set correctly
 3. Verify the MySQL database is properly connected
+4. **Java Version**: The project uses Java 17 for Railway compatibility
 
 ### If Application Fails to Start
 1. Check the deployment logs
@@ -65,10 +70,11 @@ The application includes a health check endpoint at `/api/quotes` that Railway w
 - **Database connection**: Make sure MySQL is added as a service in Railway
 - **Memory issues**: Railway provides adequate memory for Spring Boot applications
 - **MySQL URL format**: Ensure the DATABASE_URL includes the database name
+- **Java version**: Using Java 17 for Railway compatibility (changed from Java 21)
 
 ## API Endpoints
 Once deployed, your API will be available at:
-- `https://your-railway-app.railway.app/api/quotes`
+- `https://your-railway-app.railway.app/Akuko-nke-Ndu/quotes`
 
 ## Frontend Deployment
 For the React frontend, consider deploying it separately to Vercel or Netlify, or create a separate Railway service for it. 
