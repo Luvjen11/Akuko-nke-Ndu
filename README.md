@@ -154,8 +154,9 @@ Handling URLs, environment variables, and cross-origin setups.
 
 ---
 
-## 📷 **Screenshots (optional)**
+## 📷 **Video**
 
+https://github.com/user-attachments/assets/0009254a-7d43-45b1-acc2-21bea56df834
 
 ---
 
