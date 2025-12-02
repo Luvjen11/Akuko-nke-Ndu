@@ -33,3 +33,12 @@ yarn-error.log*
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Documentation tutorials
+DEPLOYMENT_GUIDE.md
+RAILWAY_DEPLOYMENT.md
+SECURITY_GUIDE.md
+ENVIRONMENT_SETUP.md
+FRONTEND_DEPLOYMENT.md
+
+railway.json
