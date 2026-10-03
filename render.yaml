@@ -1,11 +1,11 @@
 services:
   - type: web
     name: akuko-api
-    runtime: java
+    runtime: docker
     rootDir: akukoNkeNdu
     plan: free
-    buildCommand: ./mvnw clean package -DskipTests
-    startCommand: java -jar target/akukoNkeNdu-0.0.1-SNAPSHOT.jar
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /Akuko-nke-Ndu/quotes
     envVars:
       - key: DATABASE_URL
