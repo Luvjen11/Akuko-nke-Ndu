@@ -1,176 +1,207 @@
-# 🚀 Deployment Guide for Akuko nke Ndu
+# Deploy Akuko nke Ndu with Aiven and Render
 
-This guide will help you deploy your app for free and make it available on all devices as a PWA!
+This guide deploys the application using:
 
-## 📱 PWA Features Added
-- ✅ Offline support
-- ✅ Installable on mobile devices
-- ✅ App-like experience
-- ✅ Caching for better performance
+- **Aiven Free MySQL** for the database
+- **Render Free Web Service** for the Spring Boot API
+- **Render Free Static Site** for the React/Vite frontend
 
-## 🎯 Quick Deployment (15 minutes)
+The repository already includes [`render.yaml`](render.yaml), which defines both Render services.
 
-### Step 1: Deploy Backend to Railway
+## 1. Check the project before deploying
 
-1. **Go to Railway.app**
-   - Visit [railway.app](https://railway.app)
-   - Sign up with your GitHub account
+Push the latest project to GitHub. The repository root should contain:
 
-2. **Create New Project**
-   - Click "New Project"
-   - Select "Deploy from GitHub repo"
-   - Connect your repository
-
-3. **Add Database**
-   - In your project, click "New"
-   - Select "Database" → "PostgreSQL"
-   - Railway will automatically provide connection details
-
-4. **Set Environment Variables**
-   - Go to your backend service
-   - Click "Variables" tab
-   - Add these variables:
-   ```
-   DATABASE_URL=(Railway will provide this)
-   DATABASE_USERNAME=(Railway will provide this)
-   DATABASE_PASSWORD=(Railway will provide this)
-   DATABASE_DRIVER=org.postgresql.Driver
-   HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
-   PORT=8080
-   CONTEXT_PATH=/api
-   ```
-
-5. **Deploy**
-   - Railway will automatically build and deploy
-   - Wait for deployment to complete
-   - Copy your backend URL (e.g., `https://your-app.railway.app`)
-
-### Step 2: Deploy Frontend to Vercel
-
-1. **Go to Vercel.com**
-   - Visit [vercel.com](https://vercel.com)
-   - Sign up with your GitHub account
-
-2. **Import Project**
-   - Click "New Project"
-   - Import your GitHub repository
-   - Set root directory to `frontend`
-
-3. **Configure Build**
-   - Framework Preset: Vite
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-
-4. **Set Environment Variable**
-   - Add environment variable:
-   ```
-   VITE_API_URL=https://your-backend-url.railway.app/api/quotes
-   ```
-   (Replace with your actual Railway backend URL)
-
-5. **Deploy**
-   - Click "Deploy"
-   - Wait for deployment to complete
-   - Your app is now live! 🎉
-
-## 📱 Using Your PWA on Mobile
-
-### Android:
-1. Open your app in Chrome
-2. Tap the menu (⋮)
-3. Select "Add to Home screen"
-4. Your app will now appear as an icon!
-
-### iPhone:
-1. Open your app in Safari
-2. Tap the share button (□↑)
-3. Select "Add to Home Screen"
-4. Your app will now appear as an icon!
-
-## 🔧 Local Development
-
-### Backend:
-```bash
-cd akukoNkeNdu
-./mvnw spring-boot:run
+```text
+render.yaml
+frontend/
+akukoNkeNdu/
 ```
 
-### Frontend:
-```bash
-cd frontend
-npm install
-npm run dev
+Do not commit database passwords or `local.properties`.
+
+## 2. Create the Aiven MySQL database
+
+1. Open [Aiven Free MySQL](https://aiven.io/free-mysql-database).
+2. Click **Get building** and create an account.
+3. In the Aiven Console, click **Create service**.
+4. Choose **MySQL**.
+5. Select the **Free** plan.
+6. Choose a region close to your Render services.
+7. Enter a service name, such as `akuko-mysql`.
+8. Create the service and wait until its status is **Running**.
+
+Aiven's free plan is intended for prototypes and small applications. It has limited storage and resources, and the service may power off after a period of inactivity.
+
+## 3. Copy the Aiven connection details
+
+Open the Aiven MySQL service and find **Connection information**. Copy these values:
+
+- Host
+- Port
+- Database name
+- Username
+- Password
+
+Aiven commonly uses `avnadmin` as the username and `defaultdb` as the database name. Use the actual values shown in your service.
+
+Create the JDBC URL in this format:
+
+```text
+jdbc:mysql://HOST:PORT/DATABASE?sslMode=REQUIRED
 ```
 
-## 🌐 Environment Variables
+Example:
 
-### Backend (Railway):
-- `DATABASE_URL`: PostgreSQL connection string
-- `DATABASE_USERNAME`: Database username
-- `DATABASE_PASSWORD`: Database password
-- `DATABASE_DRIVER`: `org.postgresql.Driver`
-- `HIBERNATE_DIALECT`: `org.hibernate.dialect.PostgreSQLDialect`
-- `PORT`: `8080`
-- `CONTEXT_PATH`: `/api`
+```text
+jdbc:mysql://mysql-xxxxx.aivencloud.com:12345/defaultdb?sslMode=REQUIRED
+```
 
-### Frontend (Vercel):
-- `VITE_API_URL`: Your Railway backend URL
+Use the JDBC URL above for Render. Do not paste an Aiven URL beginning only with `mysql://`.
 
-## 🎨 Customizing PWA Icons
+## 4. Create the Render Blueprint
 
-Replace the placeholder icon files:
-- `frontend/public/icon-192x192.png`
-- `frontend/public/icon-512x512.png`
+1. Open [Render](https://render.com) and sign in with GitHub.
+2. Click **New**.
+3. Select **Blueprint**.
+4. Connect the GitHub repository containing this project.
+5. Select the repository.
+6. Render should detect `render.yaml`.
+7. Click **Apply**.
 
-You can create icons using:
-- [Favicon.io](https://favicon.io/)
-- [PWA Builder](https://www.pwabuilder.com/imageGenerator)
-- Any image editor
+Render will create these services:
 
-## 🔍 Testing PWA Features
+```text
+akuko-api
+akuko-frontend
+```
 
-1. **Installation**: Try adding to home screen
-2. **Offline**: Turn off internet and refresh
-3. **Performance**: Check loading speed
-4. **Updates**: Deploy new version and check for updates
+## 5. Configure the backend environment variables
 
-## 🚨 Troubleshooting
+Open the `akuko-api` service in Render and add these environment variables:
 
-### Backend Issues:
-- Check Railway logs for errors
-- Verify environment variables
-- Ensure database is connected
+```text
+DATABASE_URL=jdbc:mysql://YOUR_AIVEN_HOST:YOUR_AIVEN_PORT/YOUR_DATABASE?sslMode=REQUIRED
+DATABASE_USERNAME=YOUR_AIVEN_USERNAME
+DATABASE_PASSWORD=YOUR_AIVEN_PASSWORD
+```
 
-### Frontend Issues:
-- Check Vercel build logs
-- Verify API URL is correct
-- Test locally first
+Optional variables, using the defaults already configured by the application:
 
-### PWA Issues:
-- Check browser console for service worker errors
-- Verify manifest.json is accessible
-- Test on HTTPS (required for PWA)
+```text
+DATABASE_DRIVER=com.mysql.cj.jdbc.Driver
+HIBERNATE_DIALECT=org.hibernate.dialect.MySQLDialect
+```
 
-## 💰 Cost
+Do not add `PORT`. Render supplies the port automatically.
 
-**FREE!** 🎉
-- Railway: 500 hours/month free
-- Vercel: Unlimited static sites, 100GB bandwidth/month
-- Both have generous free tiers
+Do not add `CONTEXT_PATH`. This application uses the route `/Akuko-nke-Ndu/quotes`.
 
-## 🎯 Next Steps
+Save the variables and wait for the backend deployment to finish.
 
-1. Deploy following the guide above
-2. Test on your phone
-3. Share with friends and family
-4. Add custom icons
-5. Consider adding more PWA features
+## 6. Test the backend
 
-## 📞 Need Help?
+Render will provide a URL similar to:
 
-- Check Railway/Vercel documentation
-- Review deployment logs
-- Test locally to isolate issues
-- Check environment variables
+```text
+https://akuko-api.onrender.com
+```
 
-Your app will be live and accessible from any device! 📱✨ 
+Open this endpoint in a browser, using your actual Render URL:
+
+```text
+https://akuko-api.onrender.com/Akuko-nke-Ndu/quotes
+```
+
+An empty database should return:
+
+```json
+[]
+```
+
+The application creates its database table automatically through Hibernate.
+
+## 7. Configure the frontend
+
+Open the `akuko-frontend` service in Render and add this environment variable:
+
+```text
+VITE_API_URL=https://akuko-api.onrender.com/Akuko-nke-Ndu/quotes
+```
+
+Replace `akuko-api.onrender.com` with your actual backend URL.
+
+The frontend settings should be:
+
+```text
+Build command: npm ci && npm run build
+Publish directory: dist
+```
+
+Save the variable and deploy the frontend.
+
+## 8. Configure CORS
+
+After the frontend deploys, Render will provide a URL similar to:
+
+```text
+https://akuko-frontend.onrender.com
+```
+
+Open the backend service and go to **Environment**. Set:
+
+```text
+CORS_ALLOWED_ORIGINS=https://akuko-frontend.onrender.com
+```
+
+Use the exact frontend URL, without a trailing slash. Save the variable and redeploy `akuko-api`.
+
+## 9. Test the complete application
+
+Open the frontend URL and test:
+
+1. Loading all quotes
+2. Adding a quote
+3. Marking a quote as favourite
+4. Getting a random quote
+5. Deleting a quote
+6. Refreshing the page and confirming the data remains
+
+## Troubleshooting
+
+### The backend fails to start
+
+Check the Render logs and verify:
+
+- `DATABASE_URL` starts with `jdbc:mysql://`.
+- The Aiven service status is **Running**.
+- The host, port, database name, username, and password are correct.
+- The URL includes `?sslMode=REQUIRED`.
+
+### The frontend displays a network error
+
+Verify that:
+
+- `VITE_API_URL` ends with `/Akuko-nke-Ndu/quotes`.
+- The backend URL is correct.
+- The backend deployment is healthy.
+- `CORS_ALLOWED_ORIGINS` exactly matches the frontend URL.
+
+### The first request is slow
+
+Free Render web services can sleep after inactivity. The first request may take several seconds while the backend starts.
+
+### The database is empty
+
+This is expected for a new Aiven service. Add quotes through the deployed frontend. The application uses `spring.jpa.hibernate.ddl-auto=update` to create its table.
+
+## Portfolio notes
+
+For a portfolio demo, describe the deployment as:
+
+```text
+React/Vite frontend and Spring Boot REST API deployed on Render,
+using a managed MySQL database on Aiven and environment-based configuration.
+```
+
+The Aiven free plan is suitable for a demonstration, but it is not intended for a high-traffic production application. Never expose the database password in GitHub, screenshots, frontend code, or portfolio documentation.
