@@ -71,6 +71,43 @@
   text-align: center;
 }
 
+.server-wakeup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+
+.wake-ring {
+  width: 52px;
+  height: 52px;
+  border: 4px solid rgba(208, 215, 171, 0.7);
+  border-top-color: #D9B3B3;
+  border-radius: 50%;
+  animation: wake-ring-spin 0.9s linear infinite;
+}
+
+.wakeup-title {
+  margin: 1.25rem 0 0.35rem;
+  color: #393939;
+  font-family: 'Georgia', serif;
+  font-size: 1.15rem;
+}
+
+.wakeup-message {
+  margin: 0;
+  color: #6b6663;
+  font-family: 'Georgia', serif;
+  font-size: 0.95rem;
+}
+
+@keyframes wake-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .quote {
   font-size: 1.3rem;
   max-width: 85%;
