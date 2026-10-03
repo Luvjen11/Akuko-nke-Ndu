@@ -49,12 +49,22 @@ const Quote = () => {
         </div>
 
         <div className="quote-body">
-        <p className="quote">{quote.quote}</p>
-          {quote.error && <p className="error">{quote.error}</p>}
-          <div className="quote-details">
-            <p className="author">{quote.author}</p>
-            <p className="book">{quote.book}</p>
-          </div>
+          {quote.loading && !quote.quote ? (
+            <div className="server-wakeup" role="status" aria-live="polite">
+              <div className="wake-ring" aria-hidden="true"></div>
+              <p className="wakeup-title">Waking up the server...</p>
+              <p className="wakeup-message">This may take a few seconds.</p>
+            </div>
+          ) : (
+            <>
+              <p className="quote">{quote.quote}</p>
+              {quote.error && <p className="error">{quote.error}</p>}
+              <div className="quote-details">
+                <p className="author">{quote.author}</p>
+                <p className="book">{quote.book}</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
       <Link to="/add-quote" className="add-quote-button">
